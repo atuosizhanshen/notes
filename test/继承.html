@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function Cat(){
+			var a = 10;
+			children.call(this,a)
+		}
+		function children(param){
+			console.log(param)
+		}
+		cat = new Cat() // 10
+		console.log(cat instanceof children) // false
+//		children() // undefined
+		
+		function Organ(){ // 组合继承
+			this.name = '张三'
+			Profn.call(this,this.name);
+		}
+		function Profn(name){
+			console.log(name);
+		}
+		Organ.prototype = new Profn();
+		Organ.prototype.constructor = Organ;
+		var org = new Organ()
+		console.log(org.name)
+		console.log(org instanceof Profn) // true
+		
+		function Tab(){
+			this.name = '123'
+		}
+		Tab.prototype.init = function(){
+			console.log(111)
+		}
+		function init(){
+			
+		}
+		var tab = new Tab()
+		console.log(tab instanceof init)
+		function CheckCall(){
+			this.a = 10;
+			thisfn.call(this,'222')
+		}
+		function thisfn(par){
+			a = 'jicheng';
+			console.log(this.a)
+			console.log(par)
+		}
+		var cc = new CheckCall();
+		CheckCall()
+	</script>
+</html>

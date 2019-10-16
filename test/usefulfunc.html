@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	function DataType(tgt,type){ // 判断数据类型
+		var datatype = Object.prototype.toString.call(tgt).replace(/\[object /g,'').replace(/\]/g,'').toLowerCase();
+		return type ? datatype === type : datatype
+	}
+	console.log(DataType('yuio'))
+	DataType([], "array"); // true
+	DataType({}, "array"); // false
+	// 判断是否为空对象
+	const obj = {};
+	const flag = DataType(obj,'object') && !Object.keys(obj).length;
+</script>

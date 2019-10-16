@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>图片的懒加载</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    #ul {
+      width: 200px;
+      outline: 1px dashed #f00;
+      list-style: none;
+    }
+    #ul > li {
+      width: 180px;
+      height: 100px;
+      margin-bottom: 50px;
+      outline: 1px dashed #0f0;
+    }
+    .img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <ul id="ul">
+      <li><img class="img" data-src="https://img.alicdn.com/imgextra/i3/1886487777/O1CN0127JufVir7DmPYpu_!!1886487777-0-daren.jpg_360x360xzq90.jpg" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/imgextra/i2/2585780740/O1CN011HKxYBjGug0VPwX_!!2585780740-0-beehive-scenes.jpg_360x360xzq90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/tfscom/i4/2310153969/TB1.C3aiH1YBuNjSszeXXablFXa_!!0-item_pic.jpg_360x360xzq90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/imgextra/i1/3158956210/TB25uKZssyYBuNkSnfoXXcWgVXa_!!3158956210-0-beehive-scenes.jpg_360x360xzq90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/tfscom/TB2CXy1XerAQeBjSZFrXXbSvFXa_!!0-dgshop.jpg_360x360xzq90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/bao/uploaded/TB2EUU6w8mWBuNkSndVXXcsApXa_!!2306497993.jpg_360x360xzq90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/bao/uploaded/TB2PfjytbSYBuNjSspiXXXNzpXa_!!395676295-0-beehive-scenes.jpg_360x360xzq90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/bao/uploaded/TB2Mb.9X4PI8KJjSspoXXX6MFXa_!!2948425669-0-beehive-scenes.jpg_360x360xzq90.jpg" alt="" ></li>      
+      <li><img class="img" data-src="https://img.alicdn.com/bao/uploaded/TB2MGqTbLTJXuFjSspeXXapipXa_!!867439872.jpg_360x360xzq90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://aecpm.alicdn.com/simba/img/TB1j4LLKpXXXXcbaXXXSutbFXXX.jpg" alt="" ></li>
+      <li style="background: #f66;"><img class="img" id="rect" data-src="https://aecpm.alicdn.com/simba/img/TB13xKuLVXXXXcHapXXSutbFXXX.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://aecpm.alicdn.com/simba/img/TB1X6uHLVXXXXcCXVXXSutbFXXX.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/imgextra/i2/57/O1CN01TfSEXR1CI93oiwRz7_!!57-0-lubanu.jpg_350x350q90.jpg" alt="" ></li>
+      <li><img class="img" data-src="https://img.alicdn.com/imgextra/i3/48/O1CN01zKg3pd1CE1UnQ2TD3_!!48-0-lubanu.jpg_350x350q90.jpg" alt="" ></li>
+    </ul>
+  </div>
+  <script>
+    function lazyload() {
+      let img = document.getElementsByClassName('img')
+      let availHeight = window.screen.availHeight // 浏览器可用部分高度
+      let scrollTop = document.body.scrollTop || document.documentElement.scrollTop // 滚动隐藏的高度
+      for(let i = 0; i < img.length; i++) {
+        if(img[i].offsetTop - scrollTop < availHeight) {  // 判断条件，元素是否出现在用户视野内
+          let src = img[i].getAttribute('data-src') // 获取真实地址
+          if(src) { // 如果获取到了 data-src 说明图片是第一次出现在视野内
+            img[i].setAttribute('src', src) // 将真实地址赋给图片的src属性
+            img[i].removeAttribute('data-src') // 移除data-src
+          }
+        }
+      }
+    }
+    window.onload = lazyload // 页面加载执行 lazyload
+    window.onscroll = lazyload // 监听滚动事件，滚动时执行lazyload
+    console.log(window.screen.height)
+    console.log(window.screen.availHeight)
+    console.log(window.innerHeight)
+    console.log(window.outerHeight)
+  </script>
+</body>
+</html>

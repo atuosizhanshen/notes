@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	
+	function Person(){
+		this.isHuman = false;
+		this.printIntroduction = function () {
+			console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+		}
+	}
+	var per = new Person();
+	per.name = "zhangsan"
+	per.isHuman = true
+	per.printIntroduction();
+	
+	//Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+	const person = {
+	  isHuman: false,
+	  printIntroduction: function () {
+	    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+	  }
+	};
+	const me = Object.create(person);
+	me.name = "Matthew"; // "name" is a property set on "me", but not on "person"
+	me.isHuman = true; // inherited properties can be overwritten
+	
+	me.printIntroduction();
+	
+</script>

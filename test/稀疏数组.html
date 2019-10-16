@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	var b = new Array(3);
+        console.log(b);
+        b.map(function(v, i) {
+            console.log(i)
+        })
+    let arr = [1,2,3,4,5]
+    arr.length = 3
+    console.log(arr)
+	
+	var xhr = new XMLHttpRequest()
+	console.log(xhr)
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState ===4 && xhr.status === 200){
+			
+		}
+	}
+	xhr.open('GET','mvv',false)
+	xhr.send()
+	
+	const ThousandNum = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	const money = ThousandNum('9876541231.312');
+	console.log(money)
+	
+</script>

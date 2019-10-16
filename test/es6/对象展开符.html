@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+//	这种合并是浅拷贝
+	const arr1 = ['a', 'b'];
+	const arr2 = ['c'];
+	const arr3 = ['d', 'e'];
+	// ES5 的合并数组
+	arr1.concat(arr2, arr3);
+	// [ 'a', 'b', 'c', 'd', 'e' ]
+	console.log(arr1.concat(arr2, arr3))
+	// ES6 的合并数组
+	const aaa = [...arr1, ...arr2, ...arr3];
+	console.log(aaa)
+	function typesOf () {
+	  return Array.from(arguments, value => typeof value)
+	}
+	typesOf(null, [], NaN)
+	// ['object', 'object', 'number']
+	function list() {
+	  return Array.prototype.slice.call(arguments);
+	}
+	console.log(list(1, 2, 3));
+	
+	console.log([].copyWithin.call({length: 5, 3: 1,'m':2}, 0, 3)) // {0: 1, 3: 1, length: 5, m: 2}
+	
+	var thisarr = [1,5,10,15]
+	console.log(thisarr.find((val,idx) => val > 9)) // 10
+	
+//	[1, 2, [3, [4, 5]]].flat()
+	// [1, 2, 3, [4, 5]]
+	
+//	[1, 2, [3, [4, 5]]].flat(2)
+	// [1, 2, 3, 4, 5]
+	
+	console.log([,'aa',undefined,null].join('#'))
+	console.log([,'aa',undefined,null].toString('#'))
+</script>

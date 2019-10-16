@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function C(){}
+    C.prototype = {
+        id:"Animal",
+        sleep:function(){
+            alert("sleep");
+        }
+    }
+    C.prototype.func = function(){
+        console.log('与sleep是一样的')
+    }
+    var o = new C()
+    o.func()
+    console.log(o)
+    console.log(o.__proto__)
+    C.prototype.constructor = C
+    console.log(C.prototype.constructor)
+    console.log(o instanceof C)
+    // C.prototype = {}
+    var o2 = new C()
+    console.log(o2)
+    var i=0
+
+    function myInstanceof(left, right) {
+        let proto = Object.getPrototypeOf(left);
+        while(true) {
+            if(proto == null) return false;
+            if(proto == right.prototype) return true;
+            proto = Object.getPrototypeOf(proto); // 相当于是proto.__proto__
+        }
+    }
+    console.log(myInstanceof(o,Object))
+
+    const prototype = {name:'zl'}
+    const prototype2 = create(prototype)
+    // const prototype3 = create(prototype)
+    prototype2.age = 33
+    // prototype3.age = 33
+    console.log(prototype2)
+    // console.log(prototype3)
+    
+    function create(proto) {
+        function F() {};
+        F.prototype = proto;
+        F.prototype.constructor = F; // 此处作用是修正构造器，一般赋值原型对象时要修正一下constructor
+        return new F();
+    }
+</script>

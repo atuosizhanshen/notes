@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div>嵌入成功</div>
+	</body>
+	<script>
+		var obj1 = {
+			a:'name',
+			b:['1','2','3']
+		}
+		function shaowcopy(o){
+			let obj2 = {}
+			for(let key in o){
+				if(o.hasOwnProperty(key)){
+					obj2[key] = o[key]
+				}
+			}
+			return obj2
+		}
+		console.log(shaowcopy(obj1)) // 浅拷贝
+		// JSON.parse(JSON.stringify(copyObj)) // 深拷贝黑科技。。。俩个缺点：需要深拷贝的对象里没有函数,也不需要拷贝它原型链的属性
+		
+		function deepCopy( source ) { // 深拷贝 但是不能满足三点条件1、没有对传入参数进行校验，传入 null 时应该返回 null 而不是 {} 2、对于对象的判断逻辑不严谨，因为 typeof null === 'object' 3、没有考虑数组的兼容
+		    
+		    if(typeof source === 'object' && source != null){
+		    	let target = Array.isArray( source ) ? [] : {}
+		    	for ( var k in source ) {
+			    	if(source.hasOwnProperty(k)){
+			    		if (source[k] && typeof source[ k ] === 'object' ) {
+			    		    target[ k ] = deepCopy( source[ k ] )
+			    		} else {
+			    		    target[ k ] = source[ k ]
+			    		}
+			    	}
+			    }
+		    	return target
+		    }else{
+		    	return source
+		    }
+		    
+		    
+		}
+		//////
+		var target  = {s1:1,s2:2,s3:3}
+		var source1 = {s1:2,s3:5,s4:[1,2,3],s5:null}
+		Object.assign(target,source1)
+		target.s1 = 66
+		console.log(target) // {s1:66,s2:2,s3:5}
+		console.log(source1) // {s1:2,s3:5}
+		//////
+		var ob1 = { body: { a: 10 } };
+		var ob2 = JSON.parse(JSON.stringify(ob1));
+		console.log(ob2)
+		//////
+		var a = 2;
+		
+		function bar() {
+		    var a = 3;
+		    foo();
+		}
+		function foo() {
+		    console.log( a );
+		}
+		bar(); // 2  原因：词法作用域是在函数定义时就已经确定了，与函数是否被调用无关
+		
+		var fib = function (n){ // 递归
+		  if(n<=2){
+		    return 1;
+		  }
+		  return fib(n-1) + fib(n-2);
+		}
+		console.log(fib(9))
+		
+		var valarr = [2,4,5,1,7,9,10];
+		var marr = []
+		valarr.map((cur,idx,arr)=>{
+			marr.push(cur*2)
+		})
+		var sum = valarr.reduce(function(total,curval,curindex,arr){ // 必须要一个return
+			return total+curval
+		})
+		console.log(sum)
+		var p = {x:1121}
+		var o = Object.create(p) // 创建一个原型链
+		p.isPrototypeOf(o) // true  o继承p
+		Object.isPrototypeOf(p) // true
+		Object.getPrototypeOf(o) === p // true
+		o.name = '321'
+
+		console.log("======================================")
+		var sourceother = {
+			"a": 22,
+			"b": "33",
+			"c": function abc(){ console.log(123) },
+			"d": {"name":"张三","age":"44","obj":{"child":111}}
+		}
+		var targetother = {}
+		console.log(sourceother)
+		targetother = deepCopy(sourceother)
+		targetother.d.name = "李四"
+		targetother.d.obj.child = "222"
+		console.log(targetother)
+		console.log(typeof deepCopy)
+	</script>
+</html>

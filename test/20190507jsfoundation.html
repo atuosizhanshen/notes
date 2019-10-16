@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+// 如何手动实现一个new
+function Person(name,age){
+	this.name = name;
+	this.age = age
+}
+Person.prototype.func = function(){
+	console.log(this) // this其实就是new出来的对象 此处是p1
+}
+var p1 = new Person('zl','31')
+console.log(Person.prototype)
+console.log(p1)
+console.log(p1.func())
+console.log(typeof p1)
+//通过分析原生的new方法可以看出，在new一个函数的时候，
+// 会返回一个func同时在这个func里面会返回一个对象Object，
+// 这个对象包含父类func的属性以及隐藏的__proto__
+function New(f) { // 不健全的new方法
+    //返回一个func
+    return function () {
+        var o = {"__proto__": f.prototype};
+        f.apply(o, arguments);//继承父类的属性
+        return o; //返回一个Object
+    }
+}
+var p2 = New(Person)()
+console.log(p2)
+console.log(p2 instanceof Person) // true
+console.log(p1 == p2) // false
+
+// 第二种实现new的方法 （该方法才是new的健全正确方法）
+function create(){
+  //创建一个空对象
+  let obj = new Object();
+  //获取构造函数
+  let Constructor = [].shift.call(arguments); // 获取类数组argument中第一个参数
+  //链接到原型
+  obj.__proto__ = Constructor.prototype;
+  //绑定this值
+  let result = Constructor.apply(obj,arguments);//使用apply，将构造函数中的this指向新对象，这样新对象就可以访问构造函数中的属性和方法
+  //返回新对象
+  return typeof result === "object" ? result : obj;//如果返回值是一个对象就返回该对象，否则返回构造函数的一个实例对象
+}
+var p3 = create(Person,'rose','18')
+console.log(p3) // rose
+
+var aaa = {x:20,y:40}
+function changeaaa(obj){
+	obj.x = 100
+}
+function changeaaaa(obj){
+	obj = {x:100,y:200}
+}
+changeaaa(aaa)
+console.log(aaa)
+changeaaaa(aaa)
+console.log(aaa)
+
+var bbb = 10;
+function panta(obj){
+	obj = 100;
+}
+function tianta(obj){
+	obj = {}
+}
+panta(bbb)
+console.log(bbb)
+tianta(bbb)
+console.log(bbb)
+
+
+// 实现bindleft部分绑定功能
+var fn1 = (a,b,c,d) => a-b*c+d;
+var fn2 = bindLeft(fn1,1,2); // 绑定参数a=1,b=2
+console.log(fn2(3,4)) // 1-2*3+4 ,输出-1
+
+function bindLeft(){
+	const func = [].shift.call(arguments);
+	const args = Array.prototype.slice.call(arguments)
+	return function(){
+		const newArgs = Array.prototype.slice.call(arguments)
+		return func(...args,...newArgs)
+	}
+}
+
+// ECMAScript中所有的函数的参数都是按值传递的
+// 当函数参数是引用类型时，这个副本是指向堆内存的地址
+let obj = {};
+function changeValue(obj){
+  obj.name = 'ConardLi';
+  obj = {name:'code秘密花园'};
+}
+changeValue(obj);
+console.log(obj.name); // ConardLi
+//可见，函数参数传递的并不是变量的引用，而是变量拷贝的副本，
+//当变量是原始类型时，这个副本就是值本身，当变量是引用类型时，这个副本是指向堆内存的地址
+
+let obj2 = Object.create(obj)
+console.log(obj2.__proto__===Object.getPrototypeOf(obj2)) // true
+</script>

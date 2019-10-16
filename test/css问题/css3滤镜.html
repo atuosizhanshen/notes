@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0; padding: 0;}
+			#box1{
+				border: 1px solid #bfbfbf;
+				width: 300px;
+				padding: 20px;
+			}
+			.btn{
+				width: 250px;
+				height: 60px;
+				background: greenyellow;
+				margin-bottom: 30px;
+				text-align: center;
+				line-height: 60px;
+			}
+			#box1 .btn:hover, #box1 img:hover{
+				transition: .3s;
+				filter: brightness(1.3)contrast(130%);
+			}
+			#box2{
+				border: 1px solid #BFBFBF;
+				padding: 20px;
+				margin: 30px;
+				width: 300px;
+				height: 400px;
+			}
+			#box2 .avator{
+				width: 260px;
+				height: 260px;
+				border-radius: 50%;
+				position: relative;
+				background: url(img/bimenzaoche.png) no-repeat center center;
+				background-size: 100% 100%;
+			}
+			#box2 .avator::after{
+				content: '';
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 100%;
+				background: inherit;
+				background-size: 100% 100%;
+				filter: blur(10px)brightness(80%)opacity(.8);
+				z-index: -1;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1">
+			<div class="btn">按钮</div>
+			<img src="img/timg.jpg"/>
+		</div>
+		<div id="box2">
+			<div class="avator"></div>
+		</div>
+	</body>
+</html>

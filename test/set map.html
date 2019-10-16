@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var set = new Set()
+	set.add(1).add(2).add(3)
+	console.log(set)
+	console.log(set.has(3)) // true
+	for (let item of set.keys()){
+		console.log(item) //1 2 3
+	}
+	console.log( Array.isArray([...set])) // true
+	
+	const m = new Map();
+	const o = {p: 'Hello World'};
+	m.set(o, 'content')
+	console.log(m)
+	var arr = {'abc':123}
+	console.log(Object.keys(arr))
+</script>

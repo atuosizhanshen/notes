@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0; padding: 0;}
+			#btn{color: #0000FF;}
+			p{line-height: 1.5;padding-left: 110px;padding-top: 10px;}
+			#print{display: block;margin-left: 500px;}
+		</style>
+	</head>
+	<body>
+		<div id="btn">
+			<p>打印文字1234567890-=</p>
+			<p>打印文字1234567890-=</p>
+			<p>打印文字123456789011-=</p>
+			<div id='printBox'>
+				<p>打印文字123456789022-=</p>
+				<p>打印文字123456789033-=</p>
+				<p>打印文字123456789044-=</p>
+				<img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png">
+			</div>
+			<button id="print">打印全部</button>
+			<button id="part" onclick="doPrint()">打印局部</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var prnhtml;
+		var print1 = document.getElementById('print');
+		var printBox = document.getElementById('printBox');
+		print1.onclick = function(){
+			sessionStorage.setItem('prnhtml',printBox.innerHTML)
+			window.open('winprint1.html')
+		}
+	</script>
+</html>

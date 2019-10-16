@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>class</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	let theobj = {
+		'a':1,
+		"b":2
+	}
+	class Point {
+	  constructor(x, y) {
+	    this.x = x;
+	    this.y = y;
+//	    return Object.create(theobj)
+	  }
+	
+	  toString1() {
+	    return '(' + this.x + ', ' + this.y + ')';
+	  }
+	}
+	console.log(typeof Point) // function
+	
+	var p = new Point(1,3)
+	console.log(p instanceof Point)
+	function Method(name){
+		this.name = name;
+		this.age = 32
+	}
+	Method.prototype.xiao = function(){
+		console.log('method原型方法')
+	}
+	var you = new Method('lisi')
+	console.log(you)
+	class B{
+		method(){
+			console.log(12123)
+		}
+	}
+	var b = new B(1,2)
+	console.log(b) 
+	b.method()
+	console.log(you instanceof Method)
+	console.log('==============================')
+	class MyClass {
+	  constructor() {
+	    // ...
+	  }
+	  get prop() {
+	    return 'getter';
+	  }
+	  set prop(value) {
+	    console.log('setter: '+value);
+	  }
+	}
+	let inst = new MyClass();
+	inst.prop = 123;
+	// setter: 123
+	console.log(inst.prop) // 'getter'
+	
+	class CustomHTMLElement {
+	  constructor(element) {
+	    this.element = element;
+	  }
+	
+	  get aaa() {
+	    return this.element.innerHTML;
+	  }
+	
+	  set aaa(value) {
+	    this.element.innerHTML = value;
+	  }
+	  abc(){
+	  	console.log(123)
+	  }
+	}
+	var descriptor = Object.getOwnPropertyDescriptor(
+	  CustomHTMLElement.prototype, "abc"
+	);
+	var descriptor2 = Object.getOwnPropertyDescriptor(
+	  CustomHTMLElement.prototype, "aaa"
+	);
+	console.log(descriptor2)
+	console.log(descriptor)
+	console.log("get" in descriptor2)
+	
+	let person = new class {
+	  constructor(name) {
+	    this.name = name;
+	  }
+	
+	  sayName() {
+	    console.log(this.name);
+	  }
+	}('张三');
+	person.sayName() // 张三
+	
+	class Zhang{}
+	console.log(Zhang.name) // zhang
+	// 关于class中this指向问题
+	class Pointer{
+		constructor(){
+			this.printName = this.printName.bind(this)
+//			this.getThis = () => this;
+		}
+		printName(name = 'there'){
+			this.print(`Hello ${name}`); 
+		}
+		
+		print(text){
+			console.log(text)
+		}
+	}
+	const myName = new Pointer()
+	const { printName } = myName;
+	myName.printName()
+	printName() // TypeError: Cannot read property 'print' of undefined 如果没有bind(this)
+	
+	/////////////////Class类继承///////////////////////
+	class Father{
+		constructor(x,y){
+			this.name = x;
+			this.age  = y;
+		}
+		fmethod(m,n,o){
+			console.log(this.name+'调用了父类方法:'+m+':'+n+':'+o)
+			return this.name+' '+this.age
+		}
+	}
+	class Child extends Father{
+		constructor(x,y,gender){
+//			this.gender = gender; // super之前调用this会报错
+			super(x,y);
+			this.gender = gender;
+		}
+		cmethod(){
+			return super.fmethod(1,2,this.gender)
+		}
+	}
+	let cp = new Child('zl','32','male')
+	console.log(cp)
+	console.log(cp.cmethod())
+	console.log(cp instanceof Father)
+	console.log(cp instanceof Child)
+	//////////////////关于super指向问题///////////////
+	// 第一种情况，super作为函数调用时，代表父类的构造函数。ES6 要求，子类的构造函数必须执行一次super函数
+	// 第二种情况，super作为对象时，在普通方法中，指向父类的原型对象；在静态方法中，指向父类
+	// 由于super指向父类的原型对象，所以定义在父类实例上的方法或属性，是无法通过super调用的
+	class AA {
+	  constructor() {
+	    console.log(new.target.name);
+	  }
+	}
+	class BB extends AA {
+	  constructor() {
+	    super();
+	  }
+	}
+	console.log(new AA()) // AA
+	console.log(new BB()) // BB
+	
+	// 由于this指向子类实例，所以如果通过super对某个属性赋值，这时super就是this，赋值的属性会变成子类实例的属性
+	class AAA {
+	  constructor() {
+	    this.x = 1;
+	  }
+	}
+	
+	class BBB extends AAA {
+	  constructor() {
+	    super();
+	    this.x = 2;
+	    super.x = 3; // 此处是给实例赋值
+	    console.log(super.x); // undefined 当读取super.x的时候，读的是AAA.prototype.x，所以返回undefined▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+	    console.log(this.x); // 3
+	  }
+	}
+	let bbb = new BBB();
+	
+	// 在子类的静态方法中通过super调用父类的方法时，方法内部的this指向当前的子类，而不是子类的实例
+	class Aa {
+	  constructor() {
+	    this.x = 1;
+	  }
+	  static print() {
+	    console.log(this.x);
+	  }
+	}
+	
+	class Bb extends Aa {
+//		static x = 3;
+	  constructor() {
+	    super();
+	    this.x = 2;
+	  }
+	  static m() {
+	    super.print();
+	  }
+	}
+
+	Bb.x = 22; // 相当于给B添加静态属性
+	Bb.m() // 3
+
+</script>

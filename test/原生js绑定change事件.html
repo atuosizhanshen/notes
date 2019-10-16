@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="file" name="aaa" id="aaa"/>
+		<input type="hidden" name="bbb" id="bbb"/>
+	</body>
+</html>
+<script type="text/javascript">
+	var aaa = document.querySelector('#aaa');
+	var bbb = document.querySelector('#bbb');
+
+	aaa.addEventListener('change',function(){
+		bbb.focus()
+		bbb.value = aaa.value; // 自动赋值以后文本框已经change，理论上要发生onchange事件,但是如果不加以下这句是不会触发onchange事件的
+//		if ("createEvent" in document) {
+//			var evt = document.createEvent("HTMLEvents");
+//		 	evt.initEvent("change", false, true);
+//		 	bbb.dispatchEvent(evt);
+//		} else {
+//			// chrome不支持fireEvent这个函数
+//		 	bbb.fireEvent("onchange");
+//		}
+		var evt = new Event('change');
+		bbb.dispatchEvent(evt)
+	})
+	bbb.addEventListener('change',function(){
+		console.log(213123)
+		console.log('执行了')
+	})
+	
+	
+	
+</script>

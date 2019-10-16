@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var arr=[]
+		Array.apply(null,{length:5}).map(function(item,index){
+			console.log(item)
+			console.log(index)
+			arr.push(index)
+		})
+		console.log(arr)
+		// 关于prototype
+		function Test(name){
+			this.name = name
+		}
+		Test.prototype.aaa = 'aaa'
+		Test.prototype.bbb = 'bbb'
+		var test = new Test('战三')
+		console.log(Test.prototype.constructor.prototype.constructor.prototype)
+		console.log(test.__proto__)
+		console.log(test)
+	</script>
+</html>

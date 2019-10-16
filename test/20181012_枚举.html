@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		function Person() {
+		    this.name = "KXY";
+		}
+		Person.prototype = {
+		    constructor: Person,
+		    job: "student",
+		};
+		 
+		var kxy = new Person();
+		Object.defineProperty(kxy, "sex", {
+		    value: "female",
+		    enumerable: false
+		});
+		for(var pro in kxy) {
+		    console.log("kxy." + pro + " = " + kxy[pro]);
+		}
+		// 结果输出： kxy.name = KXY
+//					kxy.constructor = function Person() {
+//					    this.name = "KXY";
+//					}
+//					kxy.job = student
+		console.log(Object.keys(kxy)); // 输出 'name' 说明该方法只能返回对象本身具有的可枚举属性
+		console.log(JSON.stringify(kxy)); // {"name":"KXY"}
+	</script>
+</html>

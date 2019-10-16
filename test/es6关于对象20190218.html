@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	const obj = {
+	  abc:123,
+	  get foo() {},
+	  set foo(x) {}
+	};
+	var des = Object.getOwnPropertyDescriptor(obj,'foo')
+	console.log(des)
+	console.log(des.get.name)
+	
+	const proto = {
+		foo : 'zlzll'
+	}
+	const o = {
+		foo: 'world',
+		find(){
+			return super.foo;
+		}
+	}
+	Object.setPrototypeOf(o,proto) // 该方法相当于是修改o.__proto__
+	console.log(o)
+	console.log(o.find())
+	
+	const desciptors = {
+		foo :123,
+		get bar() {return 'abc'}
+	}
+	const desarr = [12,0]
+	console.log(Object.getOwnPropertyDescriptor(desciptors))
+	console.log(Reflect.ownKeys(desciptors) == Object.keys(desciptors)) // false
+	console.log(Reflect.ownKeys(desarr))
+	
+	const source = {
+	  set foo(value) {
+	    console.log(value);
+	  }
+	};
+	const target1 = {};
+	Object.assign(target1, source);
+	console.log(target1)
+	const objj = {
+	  abc:123,
+	  get foo() {},
+	  set foo(x) {}
+	};
+	const shallowClone = (obj) => Object.create(
+		Object.getPrototypeOf(obj),
+		Object.getOwnPropertyDescriptor(obj)
+	)
+	
+	console.log(typeof shallowClone)
+	console.log(shallowClone({aaa:222}))
+	
+	const person = {
+	  isHuman: false,
+	  printIntroduction: function () {
+	    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+	  }
+	};	
+	Object.setPrototypeOf(person,{abc:123})
+	const me = Object.create(person)
+	console.log(person)
+	console.log(person.__proto__) // {abc:123}b
+	console.log(me.__proto__.__proto__ == person.__proto__) // true
+	var obbbj = new Object()
+	console.log(obbbj)
+	//注意，Symbol 值作为对象属性名时，不能用点运算符。
+	var s1 = Symbol('foo') 
+	var s2 = Symbol('foo')
+	console.log(s1 == s2) // false
+</script>

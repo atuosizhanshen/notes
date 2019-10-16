@@ -1,0 +1,10 @@
+<svg viewBox='0 0 2706 2048' width='120' height='66' class='svg-hand'>
+	<g id='hand'>
+		<circle cx='370' cy='90' r='210' fill='yellow'></circle>
+		<path d='...'></path>
+	</g>
+	<path id='animation-hand-arc' d='M-514,665c0,0,1378.463-1138.762,2891,0' stroke='transparent' fill='transparent'/>
+	<animateMotion id='arcmove' xlink:href='#hand' dur='1s' begin='0' fill='freeze' repeatCount='1'>
+		<mpath xlink:href="#animation-hand-arc"/>
+	</animateMotion>
+</svg>

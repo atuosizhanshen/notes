@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<style type="text/css">
+		img {
+		    clip-path: url("#heart");
+		}
+	</style>
+	<body>
+		<img src="img/svg1.svg" type="image/svg+xml"/>
+		
+		<div style="width:200px;height:200px">
+		    <img src="img/timg.jpg" alt style="width:100%">
+		</div>
+		<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+		    <clipPath id="heart" clipPathUnits="objectBoundingBox">
+		        <path transform="scale(0.0081967, 0.0101010)" d="m61.18795,24.08746c24.91828,-57.29309 122.5489,0 0,73.66254c-122.5489,-73.66254 -24.91828,-130.95562 0,-73.66254z"/>
+		    </clipPath>
+		</svg>
+		<svg viewBox='0 0 2706 2048' width='120' height='66' class='svg-hand'>
+			<g id='hand'>
+				<circle cx='370' cy='90' r='210' fill='yellow'></circle>
+				<path d='...'></path>
+			</g>
+			<path id='animation-hand-arc' d='M-514,665c0,0,1378.463-1138.762,2891,0' stroke='transparent' fill='transparent'/>
+			<animateMotion id='arcmove' xlink:href='#hand' dur='1s' begin='0' fill='freeze' repeatCount='1'>
+				<mpath xlink:href="#animation-hand-arc"/>
+			</animateMotion>
+		</svg>
+	</body>
+	<script type="text/javascript">
+		var aaa = new Promise(function(resolve,reject){
+			console.log(123)
+		})
+		console.log(aaa)
+		const obj = {}
+		obj.a = '123'
+		console.log(obj) // {a:'123'}
+		const bbb = 'update'
+		bbb = 'change' // const 为常量不要改变它的值
+		console.log(bbb) // Uncaught TypeError: Assignment to constant variable 
+	</script>
+</html>
