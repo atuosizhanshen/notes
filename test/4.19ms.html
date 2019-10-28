@@ -32,7 +32,6 @@
 	</body>
 </html>
 <script type="text/javascript">
-	console.log（111）
 	function res(str1,str2){
 		if(!isStr(str1) || !isStr(str1)){
 			console.log('请输入字符串')
@@ -98,5 +97,9 @@
 	    return isExist
 	}
 	console.log(isMerge('abbc','ac','bb'))
-	
+
+	String.prototype.trim= function(){ // 去前后空格
+		return this.replace(/^\s+/,"").replace(/\s+$/,"");
+	}
+	let tirmstr = ' a b c dddaw sdfa saa  '
 </script>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>防抖与节流</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 1000px;
+            background: #f66;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //模拟ajax请求
+            function ajax(content) {
+                console.log('ajax request ' + content)
+            }
+            // 节流规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。
+            function throttle(fun, delay) { 
+                let last, deferTimer
+                return function () {
+                    let that = this;
+                    let _args = arguments;
+                    let now = +new Date();
+                    if (last && now < last + delay) {
+                        clearTimeout(deferTimer);
+                        deferTimer = setTimeout(function () {
+                            last = now;
+                            fun.apply(that, _args);
+                        }, delay)
+                    } else {
+                        last = now;
+                        fun.apply(that, _args);
+                    }
+                }
+            }
+            let throttleAjax = throttle(ajax, 1000)
+            let inputThrottle = document.getElementById('throttle')
+            inputThrottle.addEventListener('keyup', function (e) {
+                throttleAjax(e.target.value)
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        防抖：<input type="text" id="search">
+        <br>
+        <br>
+        <br>
+        节流：<input type="text" name="throttle" id="throttle">
+    </div>
+</body>
+</html>
+<script>
+    // 防抖在事件被触发n秒后再执行回调函数，如果在这n秒内又被触发，则重新计时。
+    const debounce = (func, delay = 200) => {
+        let timeout = null
+        return function () { // 闭包作用保存了timeout
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                func.apply(this, arguments)
+            }, delay)
+        }
+    }
+    const suggest = () => {
+        console.log('fetch')
+    }
+
+    const debounceSuggest = debounce(suggest, 500)
+
+    let inputSearch = document.getElementById('search')
+    inputSearch.addEventListener('input', () => {
+        console.log('input')
+        debounceSuggest()
+    })
+    let timer;
+    window.onscroll = function(){
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(function(){
+            let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            console.log('滚动位置：'+scrollTop)
+            timer  = undefined;
+        },2000)
+    }
+    console.log(new Date().getTime())
+</script>

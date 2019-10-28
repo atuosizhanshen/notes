@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let obj = {
+        'aaa':'111',
+        'bbb':'222',
+        abc:function(){
+            console.log('123')
+        }
+    }
+    let obj2 = Object.create(obj);
+    
+    console.log(obj2)
+    function Person(){
+        this.name = 'zl';
+        this.age = '32';
+    }
+    console.log(Person.prototype)
+    console.log(Dog.prototype)
+
+    Person.prototype = Object.create(Dog.prototype)
+    Person.prototype.constructor = Person;
+    function Dog(){
+        this.name = 'lili';
+        this.age = '10';
+    }
+    Dog.prototype.home = 'zhangjiade'
+    Dog.prototype.run = function(){
+        console.log('it is running')
+    }
+    let per = new Person()
+    console.log(new Person)
+    console.log(per.home) // zhangjiade
+    per.run() // it is running
+    console.log(Person.prototype.home) // zhangjiade
+
+    let lidog = new Dog()
+    function cesb(param){
+        console.log(`${this} the name is ${param}`)
+    }
+    
+    Function.prototype.mybind = function(context){
+        let self = this;
+        let args = [].slice.call(arguments,1);
+        let fBound = function(){
+            let _args = [].slice.call(arguments,0)
+            //this instanceof fBound为true表示构造函数的情况。如new func.bind(obj)
+            return self.apply(this instanceof fBound?this:context||window,args.concat(_args))
+        }
+        fBound.prototype = Object.create(self.prototype)//保证原函数的原型对象上的属性不丢失
+        return fBound;
+    }
+    cesb.mybind('lili')('my dear')
+</script>
