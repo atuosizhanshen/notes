@@ -4,34 +4,205 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<style type="text/css">
-			*{margin: 0; padding: 0;}
-			#btn{color: #0000FF;}
-			p{line-height: 1.5;padding-left: 110px;padding-top: 10px;}
 			#print{display: block;margin-left: 500px;}
+			/* print css */
+			*{margin: 0; padding: 0;}
+			ul,ol{list-style: none;}
+			#printBox{
+				width: 206px;
+				overflow: hidden;
+				font-size: 12px;
+				text-align: center;
+				padding-right: 5px;
+				margin: 0 auto;
+			}
+			h1,h5{font-weight: normal;}
+			h1{font-size: 24px;}
+			p{white-space: nowrap;}
+			.vb{visibility: hidden;}
+			.marT{margin-top: 30px;}
+			.marB{margin-bottom: 30px;}
+			.font16{font-size: 16px;}
+			.textL{text-align: left;text-indent: 2px;}
+			.list{display: flex;margin-top: 8px;}
+			.list>li{flex: 1;}
+			.list>li:nth-child(1){flex: 2; text-align: left;text-indent: 2px;}
+			.dinnerTime{margin-bottom: 8px;}
+			.remark{padding-left:2px; padding-right: 7px;}
+			.total{ height: 32px; text-align: right;padding: 4px 0px; padding-right: 12px;}
+			.total ul{display: block;float: right;}
+			.barcode{margin: 10px;}
 		</style>
 	</head>
 	<body>
 		<div id="btn">
-			<p>打印文字1234567890-=</p>
-			<p>打印文字1234567890-=</p>
-			<p>打印文字123456789011-=</p>
+			<!-- 
+			<img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"> -->
 			<div id='printBox'>
-				<p>打印文字123456789022-=</p>
-				<p>打印文字123456789033-=</p>
-				<p>打印文字123456789044-=</p>
-				<img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png">
+				<h5 class="textL">通用</h5>
+				<div class="title">
+					<h1>美食汇</h1>
+					<h1>***001***</h1>
+				</div>
+				<div class="vb">占位</div>
+				<div>小土豆</div>
+				<div class="dinnerTime font16">用餐：14:23前</div>
+				<div>下单时间：2019-05-13 12:52:41</div>
+				<p>========================================</p>
+				<div class="textL font16 remark">备注：多放辣，少放菜,多放辣，少放菜,多放辣，少放菜,多放辣，少放菜</div>
+				<p>========================================</p>
+				<ul class="list">
+					<li>菜品</li>
+					<li>数量</li>
+					<li>单价</li>
+					<li>小计</li>
+				</ul>
+				<p> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</p>
+				<div class="caipin">
+					<ul class="list">
+						<li>鱼香肉丝香蒂是的芬</li>
+						<li>*2</li>
+						<li>10</li>
+						<li>20</li>
+					</ul>
+					<ul class="list">
+						<li>鱼香肉丝</li>
+						<li>*2</li>
+						<li>10</li>
+						<li>20</li>
+					</ul>
+				</div>
+				<p> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</p>
+				<div class="total">
+					<ul>
+						<li>13</li>
+						<li>323</li>
+					</ul>
+					<ul>
+						<li>总数量：</li>
+						<li>总金额：</li>
+					</ul>
+				</div>
+				<p>========================================</p>
+				<div class="textL font16 remark">地址：今典花园dd 18厅 今典花园dd 18厅 今典花园dd 18厅</div>
+				<div class="barcode">
+					<div>订单号</div>
+					<div><svg id="barcode1"></svg></div>
+				</div>
+				<div class="time"></div>
+				<p class="marT marB"> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</p>
+
+				<!-- <h5 class="textL">后厨</h5>
+				<div class="title">
+					<h1>美食汇</h1>
+					<h1>***001***</h1>
+				</div>
+				<div class="vb">占位</div>
+				<div class="caipin">
+					<ul class="list">
+						<li>鱼香肉丝香蒂是的芬</li>
+						<li>*2</li>
+						<li>10</li>
+						<li>20</li>
+					</ul>
+					<ul class="list">
+						<li>鱼香肉丝</li>
+						<li>*2</li>
+						<li>10</li>
+						<li>20</li>
+					</ul>
+				</div>
+				<div class="vb">占位</div>
+				<div class="dinnerTime font16 textL">用餐：14:23前</div>
+				<div class="barcode">
+					<div>订单号</div>
+					<div><svg id="barcode1"></svg></div>
+				</div>
+				<div class="time"></div>
+				<p class="marT marB"> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</p>
+
+				<h5 class="textL">配送</h5>
+				<div class="title">
+					<h1>美食汇</h1>
+					<h1>***001***</h1>
+				</div>
+				<div class="vb">占位</div>
+				<div>小土豆</div>
+				<div class="dinnerTime font16">用餐：14:23前</div>
+				<div>下单时间：2019-05-13 12:52:41</div>
+				<p>========================================</p>
+				<div class="textL font16 remark">地址：今典花园dd 18厅 今典花园dd 18厅 今典花园dd 18厅</div>
+				<p>========================================</p>
+				<ul class="list">
+					<li>菜品</li>
+					<li>数量</li>
+					<li>单价</li>
+					<li>小计</li>
+				</ul>
+				<p> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</p>
+				<div class="caipin">
+					<ul class="list">
+						<li>鱼香肉丝香蒂是的芬</li>
+						<li>*2</li>
+						<li>10</li>
+						<li>20</li>
+					</ul>
+					<ul class="list">
+						<li>鱼香肉丝</li>
+						<li>*2</li>
+						<li>10</li>
+						<li>20</li>
+					</ul>
+				</div>
+				<p> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</p>
+				<div class="total">
+					<ul>
+						<li>13</li>
+						<li>323</li>
+					</ul>
+					<ul>
+						<li>总数量：</li>
+						<li>总金额：</li>
+					</ul>
+				</div>
+				<p>========================================</p>
+				<div class="textL font16 remark">备注：多放辣，少放菜,多放辣，少放菜,多放辣，少放菜,多放辣，少放菜</div>
+				<div class="barcode">
+					<div>订单号</div>
+					<div><svg id="barcode1"></svg></div>
+				</div>
+				<div class="time"></div> -->
 			</div>
 			<button id="print">打印全部</button>
-			<button id="part" onclick="doPrint()">打印局部</button>
 		</div>
 	</body>
+	<script src="js/jsbarcode.js"></script>
 	<script type="text/javascript">
 		var prnhtml;
 		var print1 = document.getElementById('print');
 		var printBox = document.getElementById('printBox');
+
+		var dateTime = new Date()
+		dateTime = dateTime.getUTCFullYear()+'-'+(dateTime.getMonth()+1)+'-'+dateTime.getDate()
+		console.log(dateTime)
+		// document.querySelectorAll('.time').textContent = '日期：'+dateTime
+		
+			
+		
 		print1.onclick = function(){
 			sessionStorage.setItem('prnhtml',printBox.innerHTML)
 			window.open('winprint1.html')
 		}
+		debugger
+		JsBarcode("#barcode1", "10001230103030120", {
+			fontSize: 13,
+			background: "#fff",
+			lineColor: "#000",
+			margin: 0,
+			marginLeft: 0,
+			textAlign:'center',
+			height: 30,
+  			width: 1
+		});
 	</script>
 </html>

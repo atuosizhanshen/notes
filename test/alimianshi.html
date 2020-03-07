@@ -11,10 +11,7 @@
 </body>
 </html>
 <script>
-    const nest = (items, id = null, link = 'parent_id') =>
-    items
-    .filter(item => item[link] === id)
-    .map(item => ({ ...item, children: nest(items, item.id)}));
+    // 实现树形结构让parent_id相同的在同一层级
     const comments = [
         { id: 1, parent_id: null },
         { id: 2, parent_id: 1 },
@@ -25,6 +22,12 @@
         { id: 7, parent_id: 4 },
         { id: 8, parent_id: 6 },
     ];
+
+    const nest = (items, id = null, link = 'parent_id') =>
+    items
+    .filter(item => item[link] === id)
+    .map(item => ({ ...item, children: nest(items, item.id)}));
+
     const nestedComments = nest(comments); // [{ id: 1, parent_id: null, children: [...] }]
     console.log(nestedComments)
 
@@ -35,6 +38,7 @@
         items = items.filter(function(item){
             return item[link] === id;
         })
+        console.log(items)
         return items.map(function(item){
            return {...item,children: nestes5(orginal,item.id)}
         })

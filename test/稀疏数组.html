@@ -5,6 +5,7 @@
 		<title></title>
 	</head>
 	<body>
+		<div id="wrapper"></div>
 	</body>
 </html>
 <script>
@@ -17,18 +18,111 @@
     arr.length = 3
     console.log(arr)
 	
-	var xhr = new XMLHttpRequest()
-	console.log(xhr)
-	xhr.onreadystatechange = function(){
-		if(xhr.readyState ===4 && xhr.status === 200){
+	// var xhr = new XMLHttpRequest()
+	// console.log(xhr)
+	// xhr.onreadystatechange = function(){
+	// 	if(xhr.readyState ===4 && xhr.status === 200){
 			
-		}
-	}
-	xhr.open('GET','mvv',false)
-	xhr.send()
+	// 	}
+	// }
+	// xhr.open('GET','mvv',false)
+	// xhr.send()
 	
 	const ThousandNum = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	const money = ThousandNum('9876541231.312');
 	console.log(money)
-	
+
+	var str2  = '${name 123 dadvd 333 las 666}';
+	// var regg = /\$\{(\d+)\}/g;
+	var regg = /\d+/g;
+	//console.log(regg.exec(str2)) // 123
+	//console.log(regg.exec(str2)) // 333
+
+//如果 regexp 没有标志 g，那么 match() 方法就只能在 stringObject 中执行一次匹配。
+//如果没有找到任何匹配的文本， match() 将返回 null。否则，它将返回一个数组，其中存放了与它找到的匹配文本有关的信息。
+//该数组的第 0 个元素存放的是匹配文本，而其余的元素存放的是与正则表达式的{{子表达式}}匹配的文本
+
+var str = '124fddr323532${xxxasds231afxx}253${11bnm}23354${abcd}233545xx54${666}233545xxxxx'
+function getMatchedStrs (str) {
+	var reg = /\$\{(.+?)\}/
+	var reg_g = /\$\{(.+?)\}/g
+	var result = str.match(reg_g)
+	console.log(result)
+	console.log(result[0].match(reg))
+	var list = []
+	for (var i = 0; i < result.length; i++) {
+		var item = result[i]
+		list.push(item.match(reg)[1])
+	}
+	return list
+}
+console.log( getMatchedStrs (str))
+
+//////执行顺序篇/////////
+function Foo() {
+  getName = function () { console.log(1) }
+  return this // 执行Foo()后this相当于window， getName并没有var等，所以getName被从新赋值了
+}
+Foo.getName = function () { console.log(2) }
+Foo.prototype.getName = function() { console.log(3) }
+var getName = function () { console.log(4) }
+function getName() {
+  console.log(5)
+}
+
+Foo.getName() // 2
+
+getName() // 4
+
+Foo().getName() // 1
+
+getName() // 1
+
+new Foo.getName() // 2
+
+new Foo().getName() // 3
+
+new new Foo().getName() // 3
+//拆解如下
+//var foo = new Foo();
+//var bar = new foo.getName();
+
+
+var isValid = function(s) {
+    var stack = []
+    var map = {
+        '(' : ')',
+        '[': ']',
+        '{': '}'
+    }
+    
+    for (var char of s) {
+        if(char in map) {
+			console.log(char)
+			stack.push(char)
+			console.log(stack)
+        } else {
+            if( !stack.length || char != map[stack.pop()]) {
+                return false
+            }
+        }
+    }
+    
+    // 如果最后stack 里没有元素了， 就一定是匹配的
+    return !stack.length
+};
+var brackets = '(){}()[]((((()))))';
+
+console.log(isValid(brackets))
+
+var sdf=12
+
+console.log(Object.prototype.toString.call(123))
+
+const a = {
+   value:[3,2,1],
+   valueOf: function () {return this.value.pop(); },
+} 
+
+console.log(a == 1 && a == 2 && a == 3)
 </script>

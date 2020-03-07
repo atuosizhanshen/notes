@@ -3,6 +3,34 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<style>
+			*{margin: 0; padding: 0;}
+			ul,ol{list-style: none;}
+			#printBox{
+				width: 206px;
+				overflow: hidden;
+				font-size: 12px;
+				text-align: center;
+				padding-right: 5px;
+				margin: 0 auto;
+			}
+			h1,h5{font-weight: normal;}
+			h1{font-size: 24px;}
+			p{white-space: nowrap;}
+			.vb{visibility: hidden;}
+			.marT{margin-top: 30px;}
+			.marB{margin-bottom: 30px;}
+			.font16{font-size: 16px;}
+			.textL{text-align: left;text-indent: 2px;}
+			.list{display: flex;margin-top: 8px;}
+			.list>li{flex: 1;}
+			.list>li:nth-child(1){flex: 2; text-align: left;text-indent: 2px;}
+			.dinnerTime{margin-bottom: 8px;}
+			.remark{padding-left:2px; padding-right: 7px;}
+			.total{ height: 32px; text-align: right;padding: 4px 0px; padding-right: 12px;}
+			.total ul{display: block;float: right;}
+			.barcode{margin: 10px;}
+		</style>
 	</head>
 	<body onafterprint="afterprint()">
 		<div id="printBox"></div>

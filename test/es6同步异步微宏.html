@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 宏任务、微任务，简单来说，均属 异步行为，一般情况下
+    // ，一个宏任务里面总是先顺序执行同步代码，
+    // 再顺序执行该宏任务中的微任务（嵌套的话，会更复杂一些），
+    // 等到都执行完毕，再进入下一个宏任务。
+    // 啥是宏任务？script标签包含的code、setTimeout、setInterval、setImmediately、I/O等。
+    // 啥是微任务？promise.then、process.nextTick等
+async function async1() {
+  console.log(1)
+  const result = await async2();
+  console.log(3)
+}
+
+async function async2() {
+  console.log(2);
+}
+
+Promise.resolve().then(() => {
+  console.log(4)
+})
+
+setTimeout(() => {
+  console.log(5)
+})
+
+async1();
+console.log(6);
+</script>

@@ -46,19 +46,22 @@
 
     let lidog = new Dog()
     function cesb(param){
+        this.name = 'zl';
         console.log(`${this} the name is ${param}`)
     }
-    
+    cesb.prototype.aaa = '你好'
     Function.prototype.mybind = function(context){
         let self = this;
         let args = [].slice.call(arguments,1);
         let fBound = function(){
             let _args = [].slice.call(arguments,0)
             //this instanceof fBound为true表示构造函数的情况。如new func.bind(obj)
+            console.log(this === self) // false
             return self.apply(this instanceof fBound?this:context||window,args.concat(_args))
         }
-        fBound.prototype = Object.create(self.prototype)//保证原函数的原型对象上的属性不丢失
+
+        fBound.prototype = Object.create(this.prototype)//保证原函数的原型对象上的属性不丢失
         return fBound;
     }
-    cesb.mybind('lili')('my dear')
+    cesb.mybind('lili')('my dear')   
 </script>

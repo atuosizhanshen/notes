@@ -36,5 +36,21 @@
 		}
 		getRepeat(arrepeat)
 		console.log(repeatId)
+		console.log(5/0 === 2/0) //true
+		console.log(5/0 === -2/0) //false
+		console.log(0 === -0) // true
+		console.log(Object.is(0,-0)) //false
+
+		function testfun(fn){
+			
+			console.log(typeof fn)
+			console.assert('不是函数')
+			throw new TypeError('this is not function')
+		}
+		function test(){
+
+		}
+
+		testfun(test)
 	</script>
 </html>

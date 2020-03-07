@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<p id="demo">单击按钮创建一个标题</p>
+<button onclick="myFunction()">点我</button>
+<div>
+	<input type="number" name="" id="" value="" />
+</div>
+<script>
+function myFunction(){
+	var h=document.createElement("H1");
+	var t=document.createTextNode("Hello World<p>333</p>");
+	console.log(h)
+	h.innerHTML = '<p>333</p>';
+	h.innerHTML += '<b>543</b>';
+	document.body.appendChild(h);
+};
+
+var arr = [];
+arr[0] = '111'
+arr[5] = '333'
+arr[10] = '222'
+for(var i = 0; i < arr.length; i++){
+	if(!arr.hasOwnProperty(i)) continue //continue是中止当前循环，而break会跳出整个for循环
+	console.log(i)
+}
+class Foo{
+	constructor(x,y){
+		this.x = x;
+		this.y = y;
+	}
+	static stamethod(){
+		return 'hello'
+	}
+	methoddd(){
+		return 'world ' + this.x
+	}
+}
+var foo = new Foo(1111,2)
+console.log(Foo.stamethod())
+console.log(foo.methoddd())
+
+Array.prototype.quchong = function(){
+	var res = [], json ={};
+	for(var i=0; i<this.length; i++){
+		if(!json[this[i]]){
+			res.push(this[i])
+			json[this[i]] = 1;
+		}
+	}
+	return res
+}
+arrr = [1,2,3,1,2,3,1,2,1,2,55,6,66,55]
+
+console.log(arrr.quchong())
+console.log(...arrr)
+
+console.log(new Date(1212147119552))
+
+function Func(){}
+
+var proto = Object.getPrototypeOf(Func)
+console.log(Function.prototype === Func.__proto__) // ture
+console.log(Func.__proto__ === proto) // true
+console.log(Func.prototype)
+var f = new Func()
+console.log(f)
+
+let str = "abcabcabcbbccccc";
+let num = 0;
+let char = '';
+
+ // 使其按照一定的次序排列
+str = str.split('').sort().join('');
+// "aaabbbbbcccccccc"
+
+//正则表达式中的小括号"()"。是代表分组的意思。 如果再其后面出现\1则是代表与第一个小括号中要匹配的内容相同。
+//注意：\1必须与小括号配合使用
+let re = /(\w)\1+/g;
+let matcharr = str.match(re)
+console.log(matcharr)
+str.replace(re,($0,$1) => {
+	console.log($0)
+	console.log($1)
+    if(num < $0.length){
+        num = $0.length;
+        char = $1;        
+    }
+});
+console.log(`字符最多的是${char}，出现了${num}次`);
+function ReplaceFirstUper(str)  
+{     
+    str = str.toLowerCase();     
+    return str.replace(/\b(\w)|\s(\w)/g, function(m){
+        return m.toUpperCase();
+    });    
+}
+
+console.log(ReplaceFirstUper('i have a pen, i have an apple!'));
+var sss = '/sfd/abc/trew/13245'
+function findit(str,char,num){
+	var x = str.indexOf(char);
+	if(num!==0){
+		num--
+	}else{
+		return x;
+	}
+	for(var i=0; i<num ; i++){
+		x = str.indexOf(char,x+1)
+	}
+	return x
+}
+console.log(findit(sss,'/',2)) // 找到第二个‘/’出现的位置
+var route = sss.substring(findit(sss,'/',2)+1,findit(sss,'/',3))
+console.log(route) // abc
+</script>

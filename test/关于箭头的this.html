@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function Test(){
+        this.name = 'zl'
+        this.method()
+    }
+    Test.prototype.method=function(){
+        console.log('找到了'+this.name)
+        this.create()
+    }
+    Test.prototype.printThis=function(){
+        console.log('进入了this')
+    }
+    Test.prototype.create = function(){
+        let mount = () => {
+            console.log(this)
+            this.printThis()
+        }
+        mount()
+    }
+    new Test()
+//箭头函数：箭头函数本身是没有this和arguments的，
+//在箭头函数中引用this实际上是调用的是定义时的上一层作用域的this。
+//这里强调的是上一层作用域，是因为对象是不能形成独立的作用域的。
+var obj = {
+　　pro: {
+　　　　getPro: ()=>{
+　　　　　　console.log(this);
+　　　　}
+　　}
+}
+obj.pro.getPro();//this指向的是window，因为箭头函数定义时，getPro的上一级是pro，是一个对象，不能形成单独的作用域，故指向window。y
+</script>

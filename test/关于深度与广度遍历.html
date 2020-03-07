@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    const data = [
+    {
+        name: 'a',
+        children: [
+            { name: 'b', children: [{ name: 'e' }] },
+            { name: 'c', children: [{ name: 'f' }] },
+            { name: 'd', children: [{ name: 'g' }] },
+        ],
+    },
+    {
+        name: 'a2',
+        children: [
+            { name: 'b2', children: [{ name: 'e2' }] },
+            { name: 'c2', children: [{ name: 'f2' }] },
+            { name: 'd2', children: [{ name: 'g2' }] },
+        ],
+    }
+]
+    // 深度遍历, 使用递归 后进先出
+// function getName(data) {
+//     const result = [];
+//     data.forEach(item => {
+//         const map = data => {
+//             result.push(data.name);
+//             data.children && data.children.forEach(child => map(child));
+//         }
+//         map(item);
+//     })
+//     return result.join(',');
+// }
+
+
+// // 广度遍历, 创建一个执行队列, 当队列为空的时候则结束 先进先出
+// function getName2(data) {
+//     let result = [];
+//     let queue = data;
+//     while (queue.length > 0) {
+//         [...queue].forEach(child => {
+//             queue.shift();
+//             result.push(child.name);
+//             child.children && (queue.push(...child.children));
+//         });
+//     }
+//     return result.join(',');
+// }
+
+function getName(data){
+    let result = []
+    data.forEach(item => {
+        const map = (data) => {
+            result.push(data.name)
+            data.children && data.children.map(child => map(child)) 
+        }
+        map(item)
+    });
+    return result
+}
+
+function getName2(data){
+    let result = [];
+    let queue = data;
+    while( queue.length>0 ){
+        [...queue].forEach(child => {
+            result.push(child.name)
+            queue.shift()
+            child.children && child.children.forEach(item => {
+                queue.push(item)
+            })
+        })
+    }
+    return result
+}
+
+console.log(getName(data))
+console.log(getName2(data))
+
+
+console.log(insertSort([6,3,1,8,12,4,15,7,8,341,3,4,1,6,0]))
+
+function insertSort(arr) {
+    var len = arr.length;
+    var temp;
+    for (var i = 1;i < len;i++){
+        temp = arr[i]
+        for (var j = i;j > 0 && temp < arr[j-1];j--){
+            // 当前值和之前的每个值进行比较，发现有比当前值小的值就进行重新赋值
+            arr[j] = arr[j-1];
+        }
+        arr[j] = temp;
+    }
+    return arr;
+}
+</script>

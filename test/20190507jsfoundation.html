@@ -51,7 +51,8 @@ function create(){
   return typeof result === "object" ? result : obj;//如果返回值是一个对象就返回该对象，否则返回构造函数的一个实例对象
 }
 var p3 = create(Person,'rose','18')
-console.log(p3) // rose
+console.log(p3.name) // rose
+console.log(p3.func) // func(){}
 
 var bbb = 10;
 function panta(obj){
@@ -65,6 +66,16 @@ console.log(bbb)
 tianta(bbb)
 console.log(bbb)
 
+// 神三元的
+function myNew(fn, ...args) {
+    let instance = Object.create(fn.prototype);
+    let res = fn.apply(instance, args);
+    let isObject = typeof res === 'object' && typeof res === null;
+    let isFunction = typeof res === 'function'
+    return isObject || isFunction ? res: instance;
+}
+var p4 = myNew(Person,'sanyuan','niunai')
+console.log(p4)
 
 // 实现bindleft部分绑定功能
 var fn1 = (a,b,c,d) => a-b*c+d;
@@ -94,4 +105,5 @@ console.log(obj.name); // ConardLi
 
 let obj2 = Object.create(obj)
 console.log(obj2.__proto__===Object.getPrototypeOf(obj2)) // true
+
 </script>
