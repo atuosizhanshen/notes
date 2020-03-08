@@ -56,33 +56,6 @@
 //     return result.join(',');
 // }
 
-function getName(data){
-    let result = []
-    data.forEach(item => {
-        const map = (data) => {
-            result.push(data.name)
-            data.children && data.children.map(child => map(child)) 
-        }
-        map(item)
-    });
-    return result
-}
-
-function getName2(data){
-    let result = [];
-    let queue = data;
-    while( queue.length>0 ){
-        [...queue].forEach(child => {
-            result.push(child.name)
-            queue.shift()
-            child.children && child.children.forEach(item => {
-                queue.push(item)
-            })
-        })
-    }
-    return result
-}
-
 console.log(getName(data))
 console.log(getName2(data))
 
